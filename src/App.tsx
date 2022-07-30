@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Canvas } from '@react-three/fiber';
+import { Physics } from '@react-three/cannon';
+import { DemoScene } from './scenes/DemoScene/DemoScene';
 
 function App() {
+  const wrapperStyle = {
+    width: "100vw",
+    height: "100vh",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={wrapperStyle}>
+      <Canvas>
+        <Physics
+          gravity={[0, -26, 0]} 
+          defaultContactMaterial={{ restitution: 0.6 }}
+        >        
+          <DemoScene />
+        </Physics>
+      </Canvas>
     </div>
+
   );
 }
 
