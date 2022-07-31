@@ -1,13 +1,11 @@
 import { useState } from "react";
 
 export enum KeyBindings {
-  UP = "w",
-  DOWN = "s",
   LEFT = "a",
   RIGHT = "d",
 }
 
-export enum Directions {
+export enum INPUTS {
   UP,
   DOWN,
   LEFT,
@@ -15,24 +13,31 @@ export enum Directions {
   IDLE,
 }
 
+const input = {
+  left: false,
+  right: false,
+  jump: false,
+  interact: false,
+}
+
 export const useKeyboardInput = () => {
-      const [currentDirection, setCurrentDirection] = useState(Directions.IDLE);
+  const [currentInput, setCurrentInput] = useState({ ...input });
 
   document.onkeydown = (evt) => {
     const currentKey = evt.key.toLowerCase();
 
     switch (currentKey) {
-      case KeyBindings.UP:
-        setCurrentDirection(Directions.UP);
-        return;
       case KeyBindings.LEFT:
-        setCurrentDirection(Directions.LEFT);
-        return;
-      case KeyBindings.DOWN:
-        setCurrentDirection(Directions.DOWN);
+        setCurrentInput({
+          ...currentInput,
+          left: true,
+        });
         return;
       case KeyBindings.RIGHT:
-        setCurrentDirection(Directions.RIGHT);
+        setCurrentInput({
+          ...currentInput,
+          right: true,
+        });
         return;
       default:
         return;
@@ -43,16 +48,22 @@ export const useKeyboardInput = () => {
     const currentKey = evt.key.toLowerCase();
 
     switch (currentKey) {
-      case KeyBindings.UP:
       case KeyBindings.LEFT:
-      case KeyBindings.DOWN:
+        setCurrentInput({
+          ...currentInput,
+          left: false,
+        });
+        return;
       case KeyBindings.RIGHT:
-        setCurrentDirection(Directions.IDLE);
+        setCurrentInput({
+          ...currentInput,
+          right: false,
+        });
         return;
       default:
         return;
     }
   };
 
-  return currentDirection;
+  return currentInput;
 }
