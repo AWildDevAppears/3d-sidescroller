@@ -18,7 +18,7 @@ const input = {
   right: false,
   jump: false,
   interact: false,
-}
+};
 
 export const useKeyboardInput = () => {
   const [currentInput, setCurrentInput] = useState({ ...input });
@@ -66,4 +66,4 @@ export const useKeyboardInput = () => {
   };
 
   return currentInput;
-}
+};
