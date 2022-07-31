@@ -16,6 +16,7 @@ export const DemoScene = (props: IDemoSceneProps) => {
       <pointLight position={[-10, -10, -10]} />
       <Player position={[0, -2.4, 0]} />
       <Crate position={[0, 0, 0]} />
+      <Crate position={[2, -2.4, 0]} />
       <Ground />
       <Background />
     </>
