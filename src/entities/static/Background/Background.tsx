@@ -1,23 +1,30 @@
-import { Triplet, useBox } from "@react-three/cannon";
+import { PlaneProps, Triplet, usePlane } from "@react-three/cannon";
+import { Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-interface IBackgroundProps {
-    args?: Triplet,
-
+interface IBackgroundProps extends PlaneProps {
+  args?: [width: number, height: number];
 }
+
+const defaultProps: IBackgroundProps = {
+  args: [1000, 1000],
+};
 
 export const Background = (props: IBackgroundProps) => {
-    const { args = [1000, 100, 1] } = props
-    const [ref, api] = useBox(() => ({ args }))
+  const actualProps = {
+    ...defaultProps,
+    ...props,
+  };
 
-    useFrame(() => {
-        api.position.set(0, 0, -3)
-    })
+  const [ref, api] = usePlane(() => actualProps);
 
-    return (
-        <mesh ref={ref}>
-            <boxBufferGeometry args={args} />
-            <meshStandardMaterial color={'blue'} />
-        </mesh>
-    );
-}
+  useFrame(() => {
+    api.position.set(0, 0, -3);
+  });
+
+  return (
+    <Plane ref={ref} args={actualProps.args}>
+      <meshStandardMaterial color={"blue"} />
+    </Plane>
+  );
+};
