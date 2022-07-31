@@ -18,7 +18,7 @@ export const Player = (props: IPlayerProps) => {
     z: 0,
   });
 
-  const moveSpeed = 0.3;
+  const moveSpeed = 0.1;
 
   useEffect(() => {
     setCurrentPosition({
