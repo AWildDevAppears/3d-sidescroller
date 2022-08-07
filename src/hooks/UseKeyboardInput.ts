@@ -3,14 +3,7 @@ import { useState } from "react";
 export enum KeyBindings {
   LEFT = "a",
   RIGHT = "d",
-}
-
-export enum INPUTS {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
-  IDLE,
+  JUMP = " ",
 }
 
 const input = {
@@ -39,6 +32,12 @@ export const useKeyboardInput = () => {
           right: true,
         });
         return;
+      case KeyBindings.JUMP:
+        setCurrentInput({
+          ...currentInput,
+          jump: true,
+        });
+        return;
       default:
         return;
     }
@@ -58,6 +57,12 @@ export const useKeyboardInput = () => {
         setCurrentInput({
           ...currentInput,
           right: false,
+        });
+        return;
+      case KeyBindings.JUMP:
+        setCurrentInput({
+          ...currentInput,
+          jump: false,
         });
         return;
       default:

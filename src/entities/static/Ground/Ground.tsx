@@ -1,6 +1,6 @@
-import { BoxProps, PlaneProps, useBox, usePlane } from "@react-three/cannon";
-import { Box, Plane } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { BoxProps, useBox } from "@react-three/cannon";
+import { Box } from "@react-three/drei";
+import { COLLISION_GROUPS } from "../../../constants/Physics";
 
 interface IGroundProps extends BoxProps {}
 
@@ -14,6 +14,7 @@ export const Ground = (props: IGroundProps) => {
   const actualProps = {
     ...defaultProps,
     ...props,
+    collisionFilterGroup: COLLISION_GROUPS.FLOOR,
   };
 
   const [ref] = useBox(() => actualProps);
